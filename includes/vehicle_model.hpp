@@ -31,6 +31,21 @@ class VehicleModel {
 
     void load() {
         // load values from yaml file
+        lf            = 1.17;
+        lr            = 1.77;
+        lw            = 1.612;
+        r_eff         = 0.32;
+        h_cog         = 0.50;
+        mass_total    = 1820;
+        mass_wheel    = 20;
+        inertia_x     = 210;
+        inertia_y     = 3278;
+        inertia_z     = 3746;
+        inertia_r     = 1.2825;
+        k_susp_f      = 52151;
+        d_susp_f      = 4980;
+        front_surface = 2.7;
+        drag_coef     = 0.30;
 
         // compute remaining values
         mass_suspended = mass_total - 4 * mass_wheel;
