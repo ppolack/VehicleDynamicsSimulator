@@ -1,0 +1,7 @@
+time_step: 0.01
+time_end: 10
+
+# Road conditions
+mu: 1
+
+# Initial state
