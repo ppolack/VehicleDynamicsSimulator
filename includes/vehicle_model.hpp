@@ -3,7 +3,7 @@
 #include <Eigen/Dense>
 typedef Eigen::Matrix<double, 4, 1> Vector4d;
 
-const double GRAVITY = ;
+const double GRAVITY = 9.81;
 
 class VehicleModel {
   public:
@@ -30,7 +30,9 @@ class VehicleModel {
     Vector4d fz_0;
 
     void load() {
-        
+        // load values from yaml file
+
+        // compute remaining values
         mass_suspended = mass_total - 4 * mass_wheel;
         k_susp_r       = std::pow(lf / lr, 2) * k_susp_f;
         d_susp_r       = std::pow(lf / lr, 2) * d_susp_f;
@@ -38,6 +40,8 @@ class VehicleModel {
         Vector4d lever_arm_matrix;
         lever_arm_matrix << lr, lr, lf, lf;
         f_susp_0 = mass_suspended * GRAVITY / (2 * (lf + lr)) * lever_arm_matrix;
-        fz_0     = f_susp_0 + MatrixXf::Constant(4, 1, mass_wheel * GRAVITY);
+
+        Eigen::MatrixXd wheel_weight = Eigen::MatrixXd::Constant(4, 1, mass_wheel * GRAVITY);
+        fz_0                         = f_susp_0 + wheel_weight;
     };
 };
