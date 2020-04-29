@@ -76,7 +76,6 @@ class VehicleSimulator {
 
     void simulateOneStep(double time_step);
 
-  private:
     /**
      * \brief compute the longitudinal slip ratio and lateral slip angle for each wheel
      *
@@ -85,6 +84,9 @@ class VehicleSimulator {
      */
     Slips computeSlips() const;
 
+    Forces computeForces() const;
+
+  private:
     /**
      * \brief compute the tire force using the combined Pacejka tire model
      *
@@ -108,8 +110,6 @@ class VehicleSimulator {
                                          const Vector4d forces_xp,
                                          const Vector4d forces_yp,
                                          const Vector4d forces_z) const;
-
-    Forces computeForces() const;
 
     State computeDynamics(const Vector4d forces_x,
                           const Vector4d forces_y,
