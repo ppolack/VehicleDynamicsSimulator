@@ -4,4 +4,6 @@ time_end: 10
 # Road conditions
 mu: 1
 
+verbose: true
+
 # Initial state

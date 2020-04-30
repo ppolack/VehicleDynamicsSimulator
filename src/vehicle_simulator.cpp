@@ -38,7 +38,7 @@ Slips VehicleSimulator::computeSlips() const {
         // compute longitudinal slip ratio
         if (state_[12 + k] * v_tire_in_tire_frame(k, 0) >= 0) {
             if (abs(vehicle_model_.r_eff * state_[k + 12]) >= abs(v_tire_in_tire_frame(k, 0))) {
-                // propulsion
+                // Throttle
                 slips_out(k, 0) = (vehicle_model_.r_eff * state_[k + 12] - v_tire_in_tire_frame(k, 0)) /
                                   (vehicle_model_.r_eff * state_[k + 12] +
                                    sign(state_[k + 12]) * EPSILON);  // check if copysign(,0) is positive
@@ -136,8 +136,8 @@ Forces VehicleSimulator::computeForces() const {
     return all_forces;
 }
 
-void VehicleSimulator::computeTireForcesInTireFrame(Vector4d       forces_xp,
-                                                    Vector4d       forces_yp,
+void VehicleSimulator::computeTireForcesInTireFrame(Vector4d&      forces_xp,
+                                                    Vector4d&      forces_yp,
                                                     const Slips&   slips,
                                                     const Vector4d forces_z,
                                                     const Vector4d gamma,
@@ -242,11 +242,14 @@ void VehicleSimulator::computeTireForcesInTireFrame(Vector4d       forces_xp,
             (std::cos(C_yk * atan(B_yk * tau_shift[k] - E_yk * (B_yk * tau_shift[k] - atan(B_yk * tau_shift[k]))))) /
             (std::cos(C_yk * atan(B_yk * S_Hyk - E_yk * (B_yk * S_Hyk - atan(B_yk * S_Hyk)))));
         Fyp[k] = G_yk[k] * Fyp0[k] + S_Vyk;
+
+        forces_xp = Fxp;
+        forces_yp = Fyp;
     }
 }
 
-void VehicleSimulator::convertTireForcesToVehicleFrame(Vector4d       forces_x,
-                                                       Vector4d       forces_y,
+void VehicleSimulator::convertTireForcesToVehicleFrame(Vector4d&      forces_x,
+                                                       Vector4d&      forces_y,
                                                        const Vector4d forces_xp,
                                                        const Vector4d forces_yp,
                                                        const Vector4d forces_z) const {

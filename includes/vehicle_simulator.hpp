@@ -6,6 +6,8 @@
 #include "tire_model.hpp"
 #include "vehicle_model.hpp"
 
+#include <iostream>
+
 using namespace Eigen;
 typedef Matrix<double, 16, 1> State;
 typedef Matrix<double, 5, 1>  Control;
@@ -20,8 +22,8 @@ class VehicleSimulator {
         control_ << 0.0, 0.0, 0.0, 0.0, 0.0;
         forces_ = Forces();
         slips_ << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
-        // vehicle_model_ = VehicleModel::load();;
-        // tire_model_ = TireModel::load();
+        vehicle_model_.load();
+        tire_model_.load();
     };
 
     const State getState() const {
@@ -98,15 +100,15 @@ class VehicleSimulator {
      * \param[in]:
      *
      */
-    void computeTireForcesInTireFrame(Vector4d       forces_xp,
-                                      Vector4d       forces_yp,
+    void computeTireForcesInTireFrame(Vector4d&      forces_xp,
+                                      Vector4d&      forces_yp,
                                       const Slips&   slips,
                                       const Vector4d forces_z,
                                       const Vector4d gamma,
                                       const double   mu) const;
 
-    void convertTireForcesToVehicleFrame(Vector4d       forces_x,
-                                         Vector4d       forces_y,
+    void convertTireForcesToVehicleFrame(Vector4d&      forces_x,
+                                         Vector4d&      forces_y,
                                          const Vector4d forces_xp,
                                          const Vector4d forces_yp,
                                          const Vector4d forces_z) const;
