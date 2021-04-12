@@ -82,7 +82,8 @@ class Simulator {
         std::cout << "Exporting trajectory into " << export_file_name << std::endl;
 
         // Header
-        fout << "x_world,vx_veh,"
+        fout << "x_world,"
+             << "vx_veh,"
              << "y_world,"
              << "vy_veh,"
              << "z_world,"
@@ -101,6 +102,7 @@ class Simulator {
              << "torque_fr,"
              << "torque_rl,"
              << "torque_rr,"
+             << "steering,"
              << "tau_x_fl,"
              << "tau_x_fr,"
              << "tau_x_rl,"
