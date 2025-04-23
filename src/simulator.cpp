@@ -7,7 +7,7 @@
 #include "vehicle_model.hpp"
 #include "vehicle_simulator.hpp"
 
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include <fstream>
 #include <functional>
 #include <iostream>
@@ -55,7 +55,7 @@ class Simulator {
         state_type state_vector;
         state_vector = convertToVector(vehicle_simulator_.getState());
         rk4_.do_step(
-            std::bind(&Simulator::system, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+            boost::bind(&Simulator::system, this, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3),
             state_vector,
             tt,
             time_step);
