@@ -43,49 +43,51 @@ make
 
 ## Usage
 
-The full trajectory obtained is then exported to a csv file containing all information :
+The full trajectory obtained is then exported to a csv file defined by `export_file_name` containing all information:
 
-- x_world: X coordinate in the world frame (meter)
-- vx_veh: longitudinal speed of the vehicle in vehicle frame (meter/s)
-- y_world: Y coordinate in the world frame (meter)
-- vy_veh: lateral speed of the vehicle in vehicle frame (meter/s)
-- z_world: Z coordinate in the world frame (meter)
-- vz_veh: vertical speed of the vehicle in vehicle frame (meter/s)
-- roll: roll angle of the carbody (rad)
-- d_roll: roll rate of the carbody (rad/s)
-- pitch: pitch angle of the carbody (rad)
-- d_pitch: pitch rate of the carbody (rad/s)
-- yaw: yaw angle of the carbody (rad)
-- d_yaw: yaw rate of the carbody (rad/s)
-- omega_fl: front left wheel rotation speed (rad/s)
-- omega_fr: front right wheel rotation speed (rad/s)
-- omega_rl: rear left wheel rotation speed (rad/s)
-- omega_rr: rear right wheel rotation speed (rad/s)
-- torque_fl: front left wheel applied torque (Nm)
-- torque_fr: front right wheel applied torque (Nm)
-- torque_rl: rear left wheel applied torque (Nm)
-- torque_rr: rear right wheel applied torque (Nm)
-- steering: steering angle of both front wheels (rad)
-- tau_x_fl: front left wheel longitudinal slip ratio (-)
-- tau_x_fr: front right wheel longitudinal slip ratio (-)
-- tau_x_rl: rear left wheel longitudinal slip ratio (-)
-- tau_x_rr: rear right wheel longitudinal slip ratio (-)
-- alpha_y_fl: front left wheel lateral slip angle (rad)
-- alpha_y_fr: front right wheel lateral slip angle (rad)
-- alpha_y_rl: rear left wheel lateral slip angle (rad)
-- alpha_y_rr: rear right wheel lateral slip angle (rad)
-- force_xp_fl: front left wheel longitudinal force in tire frame (N)
-- force_xp_fr: front right wheel longitudinal force in tire frame (N)
-- force_xp_rl: rear left wheel longitudinal force in tire frame (N)
-- force_xp_rr: rear right wheel longitudinal force in tire frame (N)
-- force_yp_fl: front left wheel lateral force in tire frame (N)
-- force_yp_fr: front right wheel lateral force in tire frame (N)
-- force_yp_rl: rear left wheel lateral force in tire frame (N)
-- force_yp_rr: rear right wheel lateral force in tire frame (N)
-- force_z_fl: front left wheel normal reaction force (N)
-- force_z_fr: front right wheel normal reaction force (N)
-- force_z_rl: rear left wheel normal reaction force (N)
-- force_z_rr: rear right wheel normal reaction force (N)
+| Value | Description |
+| :--------------- |:---------------|
+| x_world | X coordinate in the world frame (meter) |
+| vx_veh | longitudinal speed of the vehicle in vehicle frame (meter/s) |
+| y_world | Y coordinate in the world frame (meter) |
+| vy_veh | lateral speed of the vehicle in vehicle frame (meter/s) |
+| z_world | Z coordinate in the world frame (meter) |
+| vz_veh | vertical speed of the vehicle in vehicle frame (meter/s) |
+| roll | roll angle of the carbody (rad) |
+| d_roll | roll rate of the carbody (rad/s) |
+| pitch | pitch angle of the carbody (rad) |
+| d_pitch | pitch rate of the carbody (rad/s) |
+| yaw | yaw angle of the carbody (rad) |
+| d_yaw | yaw rate of the carbody (rad/s) |
+| omega_fl | front left wheel rotation speed (rad/s) |
+| omega_fr | front right wheel rotation speed (rad/s) |
+| omega_rl | rear left wheel rotation speed (rad/s) |
+| omega_rr | rear right wheel rotation speed (rad/s) |
+| torque_fl | front left wheel applied torque (Nm) |
+| torque_fr | front right wheel applied torque (Nm) |
+| torque_rl | rear left wheel applied torque (Nm) |
+| torque_rr | rear right wheel applied torque (Nm) |
+| steering | steering angle of both front wheels (rad) |
+| tau_x_fl | front left wheel longitudinal slip ratio (-) |
+| tau_x_fr | front right wheel longitudinal slip ratio (-) |
+| tau_x_rl | rear left wheel longitudinal slip ratio (-) |
+| tau_x_rr | rear right wheel longitudinal slip ratio (-) |
+| alpha_y_fl | front left wheel lateral slip angle (rad) |
+| alpha_y_fr | front right wheel lateral slip angle (rad) |
+| alpha_y_rl | rear left wheel lateral slip angle (rad) |
+| alpha_y_rr | rear right wheel lateral slip angle (rad) |
+| force_xp_fl | front left wheel longitudinal force in tire frame (N) |
+| force_xp_fr | front right wheel longitudinal force in tire frame (N) |
+| force_xp_rl | rear left wheel longitudinal force in tire frame (N) |
+| force_xp_rr | rear right wheel longitudinal force in tire frame (N) |
+| force_yp_fl | front left wheel lateral force in tire frame (N) |
+| force_yp_fr | front right wheel lateral force in tire frame (N) |
+| force_yp_rl | rear left wheel lateral force in tire frame (N) |
+| force_yp_rr | rear right wheel lateral force in tire frame (N) |
+| force_z_fl | front left wheel normal reaction force (N) |
+| force_z_fr | front right wheel normal reaction force (N) |
+| force_z_rl | rear left wheel normal reaction force (N) |
+| force_z_rr | rear right wheel normal reaction force (N) |
 
 ## License
 
