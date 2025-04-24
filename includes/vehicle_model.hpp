@@ -1,4 +1,5 @@
 #pragma once
+#include <yaml-cpp/yaml.h>
 
 #include <Eigen/Dense>
 typedef Eigen::Matrix<double, 4, 1> Vector4d;
@@ -30,22 +31,24 @@ class VehicleModel {
     Vector4d fz_0;
 
     void load() {
+        YAML::Node vehicle_config_file = YAML::LoadFile("config/vehicle_description.yaml");
+
         // load values from yaml file
-        lf            = 1.17;
-        lr            = 1.77;
-        lw            = 1.612;
-        r_eff         = 0.32;
-        h_cog         = 0.50;
-        mass_total    = 1820;
-        mass_wheel    = 20;
-        inertia_x     = 210;
-        inertia_y     = 3278;
-        inertia_z     = 3746;
-        inertia_r     = 1.2825;
-        k_susp_f      = 52151;
-        d_susp_f      = 4980;
-        front_surface = 2.7;
-        drag_coef     = 0.30;
+        lf            = vehicle_config_file["lf"].as<double>();
+        lr            = vehicle_config_file["lr"].as<double>();
+        lw            = vehicle_config_file["lw"].as<double>();
+        r_eff         = vehicle_config_file["r_eff"].as<double>();
+        h_cog         = vehicle_config_file["h_cog"].as<double>();
+        mass_total    = vehicle_config_file["mass_total"].as<double>();
+        mass_wheel    = vehicle_config_file["mass_wheel"].as<double>();
+        inertia_x     = vehicle_config_file["inertia_x"].as<double>();
+        inertia_y     = vehicle_config_file["inertia_y"].as<double>();
+        inertia_z     = vehicle_config_file["inertia_z"].as<double>();
+        inertia_r     = vehicle_config_file["inertia_r"].as<double>();
+        k_susp_f      = vehicle_config_file["k_susp_f"].as<double>();
+        d_susp_f      = vehicle_config_file["d_susp_f"].as<double>();
+        front_surface = vehicle_config_file["front_surface"].as<double>();
+        drag_coef     = vehicle_config_file["drag_coef"].as<double>();
 
         // compute remaining values
         mass_suspended = mass_total - 4 * mass_wheel;
