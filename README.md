@@ -32,6 +32,7 @@ Install dependencies
 ```bash
 sudo apt install libeigen3-dev
 sudo apt-get install libboost-all-dev
+sudo apt-get install libyaml-cpp-dev
 ```
 
 Build project

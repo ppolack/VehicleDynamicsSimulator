@@ -12,8 +12,8 @@
 #include <functional>
 #include <iostream>
 #include <vector>
-
 #include <typeinfo>
+#include <yaml-cpp/yaml.h>
 
 using namespace boost::numeric::odeint;
 
@@ -161,8 +161,11 @@ class Simulator {
  */
 int main() {
     // fetch simulation params
-    double time_end  = 100;
-    double time_step = 0.001;  // 0.01 better
+    YAML::Node sim_config_file = YAML::LoadFile("config/simulation.yaml");
+
+    double time_end  = sim_config_file["time_end"].as<double>();
+    double time_step = sim_config_file["time_step"].as<double>();
+    bool verbose = sim_config_file["verbose"].as<bool>();
 
     double n_steps = floor(time_end / time_step) + 1;
 
@@ -214,7 +217,7 @@ int main() {
 
         sim.simulate(tt, time_step);
 
-        if (fabs(std::remainder(tt, 1)) < time_step / 2) {
+        if (verbose && fabs(std::remainder(tt, 1)) < time_step / 2) {
             std::cout << "----------------" << std::endl;
             std::cout << "time: " << tt << std::endl;
             std::cout << "X: " << sim.getVehicleSimulator().getState()(0, 0) << std::endl;
@@ -242,10 +245,6 @@ int main() {
                       << sim.getVehicleSimulator().getForces().z[2] << ", "
                       << sim.getVehicleSimulator().getForces().z[3] << std::endl;
         }
-        //     // display state
-        //     std::cout << "X position: " << sim.getVehicleSimulator().getState()[0] << std::endl;
-        //     std::cout << "Y position: " << sim.getVehicleSimulator().getState()[2] << std::endl;
-        //     std::cout << "yaw position: " << sim.getVehicleSimulator().getState()[6] << std::endl;
     }
 
     sim.exportTrajInCsv();
