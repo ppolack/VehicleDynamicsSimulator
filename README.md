@@ -25,6 +25,8 @@ Please quote my PhD if using my simulator for publication or whatever other use 
 
 ## Installation
 
+### Simulator
+
 Install dependencies
 
 ```bash
@@ -41,8 +43,28 @@ cmake ..
 make
 ```
 
+### Plot Utilities
+
+Install Poetry if you wish to use the plot utilities
+
+```bash
+sudo apt install pipx
+pipx install poetry
+```
+
 ## Usage
 
+**Step 1:**
+Define the control inputs in the main funciton of the simulator.cpp file (this is going to be improved later)
+
+**Step 2:**
+Run the program
+
+```bash
+./build/10DoFVehicleSimulator
+```
+
+**Step 3:**
 The full trajectory obtained is then exported to a csv file defined by `export_file_name` containing all information:
 
 | Value | Description |
@@ -88,6 +110,21 @@ The full trajectory obtained is then exported to a csv file defined by `export_f
 | force_z_fr | front right wheel normal reaction force (N) |
 | force_z_rl | rear left wheel normal reaction force (N) |
 | force_z_rr | rear right wheel normal reaction force (N) |
+
+**Step 4:**
+Plot some of the main graphs using the plot utilitary available
+
+```bash
+poetry run python src/scripts/plot_traj_file.py <path_to_csv_results> 
+```
+
+## TODO
+
+- Load tire parameters from configuration file
+
+- Load `export_file_name` from configuration file
+
+- Control vehicle interactively (via UDP socket or message queue)
 
 ## License
 
