@@ -1,4 +1,5 @@
 #pragma once
+#include <yaml-cpp/yaml.h>
 
 class TireModel {
   public:
@@ -95,96 +96,98 @@ class TireModel {
     double s_sz4;
 
     void load() {
-        // Pure longitudinal slip parameters for computing longitudinal forces
-        p_Cx1 = 1.65;
-        p_Dx1 = 1;
-        p_Dx2 = 0;
-        p_Ex1 = -0.5;
-        p_Ex2 = 0;
-        p_Ex3 = 0;
-        p_Ex4 = 0;
-        p_Kx1 = 12;
-        p_Kx2 = 10;
-        p_Kx3 = -0.6;
-        p_Hx1 = 0;
-        p_Hx2 = 0;
-        p_Vx1 = 0;
-        p_Vx2 = 0;
+      YAML::Node tire_config_file = YAML::LoadFile("config/tire_description.yaml");
 
-        // Pure side slip parameters for computing lateral forces
-        p_Cy1 = 1.3;
-        p_Dy1 = 1;
-        p_Dy2 = 0;
-        p_Dy3 = 0;
-        p_Ey1 = -1;
-        p_Ey2 = 0;
-        p_Ey3 = 0;
-        p_Ey4 = 0;
-        p_Ky1 = 10;
-        p_Ky2 = 1.5;
-        p_Ky3 = 0;
-        p_Hy1 = 0;
-        p_Hy2 = 0;
-        p_Hy3 = 0.25;
-        p_Vy1 = 0;
-        p_Vy2 = 0;
-        p_Vy3 = 0.15;
-        p_Vy4 = 0;
+      // Pure longitudinal slip parameters for computing longitudinal forces
+      p_Cx1 = tire_config_file["p_Cx1"].as<double>();
+      p_Dx1 = tire_config_file["p_Dx1"].as<double>();
+      p_Dx2 = tire_config_file["p_Dx2"].as<double>();
+      p_Ex1 = tire_config_file["p_Ex1"].as<double>();
+      p_Ex2 = tire_config_file["p_Ex2"].as<double>();
+      p_Ex3 = tire_config_file["p_Ex3"].as<double>();
+      p_Ex4 = tire_config_file["p_Ex4"].as<double>();
+      p_Kx1 = tire_config_file["p_Kx1"].as<double>();
+      p_Kx2 = tire_config_file["p_Kx2"].as<double>();
+      p_Kx3 = tire_config_file["p_Kx3"].as<double>();
+      p_Hx1 = tire_config_file["p_Hx1"].as<double>();
+      p_Hx2 = tire_config_file["p_Hx2"].as<double>();
+      p_Vx1 = tire_config_file["p_Vx1"].as<double>();
+      p_Vx2 = tire_config_file["p_Vx2"].as<double>();
 
-        // Pure side slip parameters for computing self-aligning moment
-        q_Bz1  = 6;
-        q_Bz2  = -4;
-        q_Bz3  = 0.6;
-        q_Bz4  = 0;
-        q_Bz5  = 0;
-        q_Bz10 = 0.7;
-        q_Cz1  = 1.05;
-        q_Dz1  = 0.12;
-        q_Dz2  = -0.03;
-        q_Dz3  = 0;
-        q_Dz4  = -1;
-        q_Dz6  = 0;
-        q_Dz7  = 0;
-        q_Dz8  = 0.6;
-        q_Dz9  = 0.2;
-        q_Ez1  = -10;
-        q_Ez2  = 0;
-        q_Ez3  = 0;
-        q_Ez4  = 0;
-        q_Ez5  = 0;
-        q_Hz1  = 0;
-        q_Hz2  = 0;
-        q_Hz3  = 0;
-        q_Hz4  = 0;
+      // Pure side slip parameters for computing lateral forces
+      p_Cy1 = tire_config_file["p_Cy1"].as<double>();
+      p_Dy1 = tire_config_file["p_Dy1"].as<double>();
+      p_Dy2 = tire_config_file["p_Dy2"].as<double>();
+      p_Dy3 = tire_config_file["p_Dy3"].as<double>();
+      p_Ey1 = tire_config_file["p_Ey1"].as<double>();
+      p_Ey2 = tire_config_file["p_Ey2"].as<double>();
+      p_Ey3 = tire_config_file["p_Ey3"].as<double>();
+      p_Ey4 = tire_config_file["p_Ey4"].as<double>();
+      p_Ky1 = tire_config_file["p_Ky1"].as<double>();
+      p_Ky2 = tire_config_file["p_Ky2"].as<double>();
+      p_Ky3 = tire_config_file["p_Ky3"].as<double>();
+      p_Hy1 = tire_config_file["p_Hy1"].as<double>();
+      p_Hy2 = tire_config_file["p_Hy2"].as<double>();
+      p_Hy3 = tire_config_file["p_Hy3"].as<double>();
+      p_Vy1 = tire_config_file["p_Vy1"].as<double>();
+      p_Vy2 = tire_config_file["p_Vy2"].as<double>();
+      p_Vy3 = tire_config_file["p_Vy3"].as<double>();
+      p_Vy4 = tire_config_file["p_Vy4"].as<double>();
 
-        // Longitudinal parameters for combined slip
-        r_Bx1 = 5;
-        r_Bx2 = 8;
-        r_Cx1 = 1;
-        r_Ex1 = 0;  // Not given in Pacejka's book
-        r_Ex2 = 0;  // Not given in Pacejka's book
-        r_Hx1 = 0;
+      // Pure side slip parameters for computing self-aligning moment
+      q_Bz1  = tire_config_file["q_Bz1"].as<double>();
+      q_Bz2  = tire_config_file["q_Bz2"].as<double>();
+      q_Bz3  = tire_config_file["q_Bz3"].as<double>();
+      q_Bz4  = tire_config_file["q_Bz4"].as<double>();
+      q_Bz5  = tire_config_file["q_Bz5"].as<double>();
+      q_Bz10 = tire_config_file["q_Bz10"].as<double>();
+      q_Cz1  = tire_config_file["q_Cz1"].as<double>();
+      q_Dz1  = tire_config_file["q_Dz1"].as<double>();
+      q_Dz2  = tire_config_file["q_Dz2"].as<double>();
+      q_Dz3  = tire_config_file["q_Dz3"].as<double>();
+      q_Dz4  = tire_config_file["q_Dz4"].as<double>();
+      q_Dz6  = tire_config_file["q_Dz6"].as<double>();
+      q_Dz7  = tire_config_file["q_Dz7"].as<double>();
+      q_Dz8  = tire_config_file["q_Dz8"].as<double>();
+      q_Dz9  = tire_config_file["q_Dz9"].as<double>();
+      q_Ez1  = tire_config_file["q_Ez1"].as<double>();
+      q_Ez2  = tire_config_file["q_Ez2"].as<double>();
+      q_Ez3  = tire_config_file["q_Ez3"].as<double>();
+      q_Ez4  = tire_config_file["q_Ez4"].as<double>();
+      q_Ez5  = tire_config_file["q_Ez5"].as<double>();
+      q_Hz1  = tire_config_file["q_Hz1"].as<double>();
+      q_Hz2  = tire_config_file["q_Hz2"].as<double>();
+      q_Hz3  = tire_config_file["q_Hz3"].as<double>();
+      q_Hz4  = tire_config_file["q_Hz4"].as<double>();
 
-        // Lateral parameters for combined slip
-        r_By1 = 7;
-        r_By2 = 2.5;
-        r_By3 = 0;
-        r_Cy1 = 1;
-        r_Ey1 = 0;  // Not given in Pacejka's book
-        r_Ey2 = 0;  // Not given in Pacejka's book
-        r_Hy1 = 0;  // 0.02 norammly, except if one wants Fx^2+ Fy^2 to be perfectly symmetric
-        r_Hy2 = 0;  // Not given in Pacejka's book
-        r_Vy1 = 0;
-        r_Vy2 = 0;
-        r_Vy3 = -0.2;
-        r_Vy4 = 14;
-        r_Vy5 = 1.9;
-        r_Vy6 = 10;
+      // Longitudinal parameters for combined slip
+      r_Bx1 = tire_config_file["r_Bx1"].as<double>();
+      r_Bx2 = tire_config_file["r_Bx2"].as<double>();
+      r_Cx1 = tire_config_file["r_Cx1"].as<double>();
+      r_Ex1 = tire_config_file["r_Ex1"].as<double>();  // Not given in Pacejka's book
+      r_Ex2 = tire_config_file["r_Ex2"].as<double>();  // Not given in Pacejka's book
+      r_Hx1 = tire_config_file["r_Hx1"].as<double>();
 
-        // Self-aligning moment parameters for combined slip
-        s_sz1 = 0;
-        s_sz2 = -0.1;
-        s_sz3 = -1.0;
-        s_sz4 = 0;
+      // Lateral parameters for combined slip
+      r_By1 = tire_config_file["r_By1"].as<double>();
+      r_By2 = tire_config_file["r_By2"].as<double>();
+      r_By3 = tire_config_file["r_By3"].as<double>();
+      r_Cy1 = tire_config_file["r_Cy1"].as<double>();
+      r_Ey1 = tire_config_file["r_Ey1"].as<double>();  // Not given in Pacejka's book
+      r_Ey2 = tire_config_file["r_Ey2"].as<double>();  // Not given in Pacejka's book
+      r_Hy1 = tire_config_file["r_Hy1"].as<double>();  // 0.02 norammly, except if one wants Fx^2+ Fy^2 to be perfectly symmetric
+      r_Hy2 = tire_config_file["r_Hy2"].as<double>();  // Not given in Pacejka's book
+      r_Vy1 = tire_config_file["r_Vy1"].as<double>();
+      r_Vy2 = tire_config_file["r_Vy2"].as<double>();
+      r_Vy3 = tire_config_file["r_Vy3"].as<double>();
+      r_Vy4 = tire_config_file["r_Vy4"].as<double>();
+      r_Vy5 = tire_config_file["r_Vy5"].as<double>();
+      r_Vy6 = tire_config_file["r_Vy6"].as<double>();
+
+      // Self-aligning moment parameters for combined slip
+      s_sz1 = tire_config_file["s_sz1"].as<double>();
+      s_sz2 = tire_config_file["s_sz2"].as<double>();
+      s_sz3 = tire_config_file["s_sz3"].as<double>();
+      s_sz4 = tire_config_file["s_sz4"].as<double>();
     };
 };
